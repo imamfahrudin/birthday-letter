@@ -9,7 +9,7 @@ Open `script.js` and edit the `CONFIG` object at the top:
 - `name`: birthday person's name
 - `age`: the number shown in the reveal
 - `sender`: the signature name
-- `letter`: an array of paragraphs; replace `[shared memory]` with a real memory
+- `letter`: an array of paragraphs; personalize any paragraph with your own memories or details
 
 The signature automatically uses `CONFIG.sender`, so changing that value changes the closing line too.
 

@@ -100,6 +100,7 @@ button:focus-visible {
     radial-gradient(circle at 8% 20%, rgba(255, 255, 255, 0.56), transparent 24%),
     linear-gradient(135deg, var(--lavender) 0%, var(--pink) 52%, var(--peach) 100%);
   overflow-y: auto;
+  align-items: center;
 }
 
 .eyebrow {
@@ -347,7 +348,11 @@ button:disabled {
   width: min(100%, 680px);
   max-height: calc(100vh - 2.5rem);
   max-height: calc(100dvh - 2.5rem);
+  min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
+  overflow-wrap: anywhere;
+  scrollbar-gutter: stable;
   overscroll-behavior: contain;
   padding: clamp(1.7rem, 6vw, 3.25rem) clamp(1.25rem, 7vw, 4.4rem);
   border: 1px solid rgba(117, 74, 105, 0.08);
@@ -394,13 +399,17 @@ button:disabled {
 }
 
 .letter-body {
+  width: 100%;
   min-height: 10rem;
   color: var(--deep-text);
   font-size: 1rem;
   line-height: 1.75;
+  overflow-wrap: anywhere;
+  word-break: break-word;
 }
 
 .letter-paragraph {
+  max-width: 100%;
   margin-bottom: 1rem;
 }
 
@@ -483,17 +492,26 @@ button:disabled {
   .screen-subtitle { margin-bottom: 1rem; }
   .envelope-wrap { min-height: 165px; }
   .envelope { width: min(72vw, 235px); }
-  .letter-card { padding-inline: 1.1rem; }
+  .letter-card {
+    width: 100%;
+    max-height: calc(100vh - 2rem);
+    max-height: calc(100dvh - 2rem);
+    padding-inline: 1.1rem;
+  }
   .letter-body { font-size: 0.96rem; line-height: 1.65; }
 }
 
 @media (orientation: landscape) and (max-height: 620px) {
   .screen { padding-block: 1rem; }
   .screen--welcome { overflow-y: auto; }
+  .screen--letter { align-items: start; }
   .welcome-content { padding-block: 1rem; }
   .envelope-wrap { min-height: 130px; margin-bottom: 0.5rem; }
   .envelope { width: min(34vw, 220px); }
-  .letter-card { max-height: calc(100vh - 1.5rem); max-height: calc(100dvh - 1.5rem); }
+  .letter-card {
+    max-height: calc(100vh - 1.5rem);
+    max-height: calc(100dvh - 1.5rem);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

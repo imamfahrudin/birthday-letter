@@ -8,7 +8,7 @@ const CONFIG = {
   sender: "Kevin",
   letter: [
     "Happy birthday to one of the most wonderful people I know. Today is all about celebrating you: your big heart, your bright spirit, and the way you make ordinary moments feel special.",
-    "I hope you know how much your kindness means to the people around you. You carry so much strength with such a gentle heart, and I feel lucky to call you my friend. I still smile whenever I think about [shared memory].",
+    "I hope you know how much your kindness means to the people around you. You carry so much strength with such a gentle heart, and I feel lucky to call you my friend. I still smile when I think about all the little conversations, laughs, and moments we have shared.",
     "As you step into this new age, I wish you good health, deep happiness, brave dreams, and every success you are working toward. May 26 bring you more reasons to laugh, rest, grow, and feel proud of yourself.",
     "And yes, you are officially 26 now—which sounds very grown-up, but do not worry: you are still allowed to be silly, eat birthday cake for breakfast, and pretend you have everything figured out.",
     "Thank you for being exactly who you are. I hope this year is as warm, beautiful, and unforgettable as you deserve. Happy birthday, Rizka. I am always cheering for you."
@@ -22,7 +22,7 @@ const screens = {
 };
 
 const openButton = document.querySelector("#open-button");
-const replayButton = document.querySelector("#replay-button");
+const backButton = document.querySelector("#back-button");
 const envelope = document.querySelector("#envelope");
 const ageNumber = document.querySelector("#age-number");
 const letterBody = document.querySelector("#letter-body");
@@ -125,8 +125,8 @@ async function typeLetter() {
   letterBody.replaceChildren();
   letterClosing.hidden = true;
   letterClosing.classList.remove("is-visible");
-  replayButton.hidden = true;
-  replayButton.disabled = true;
+  backButton.hidden = true;
+  backButton.disabled = true;
 
   for (const paragraphText of CONFIG.letter) {
     if (currentRun !== typingRun) return;
@@ -156,8 +156,8 @@ async function typeLetter() {
 
   letterClosing.hidden = false;
   window.requestAnimationFrame(() => letterClosing.classList.add("is-visible"));
-  replayButton.hidden = false;
-  replayButton.disabled = false;
+  backButton.hidden = false;
+  backButton.disabled = false;
 }
 
 function wait(milliseconds) {
@@ -239,10 +239,19 @@ function updateConfetti() {
 }
 
 openButton.addEventListener("click", startExperience);
-replayButton.addEventListener("click", () => {
-  if (replayButton.disabled || activeScreen !== "letter") return;
-  launchConfetti(35);
-  typeLetter();
+backButton.addEventListener("click", () => {
+  if (backButton.disabled || activeScreen !== "letter") return;
+
+  typingRun += 1;
+  backButton.hidden = true;
+  backButton.disabled = true;
+  letterClosing.hidden = true;
+  letterClosing.classList.remove("is-visible");
+  envelope.classList.remove("is-opening");
+  ageNumber.textContent = "1";
+  ageNumber.classList.remove("is-landed");
+  openButton.disabled = false;
+  showScreen("welcome");
 });
 
 window.addEventListener("resize", resizeCanvas);
