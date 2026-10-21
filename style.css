@@ -193,7 +193,8 @@ button:focus-visible {
   isolation: isolate;
   touch-action: pan-y;
   cursor: grab;
-  min-height: 245px;
+  height: 250px;
+  min-height: 250px;
   display: grid;
   place-items: center;
   align-content: center;
