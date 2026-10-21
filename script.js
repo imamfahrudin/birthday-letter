@@ -48,7 +48,7 @@ let confettiFrame = null;
 let particles = [];
 
 document.title = `Buat ${CONFIG.name}, dari ${CONFIG.sender} 💌`;
-document.querySelector("#welcome-title").innerHTML = `Hai ${escapeHtml(CONFIG.name)}... <span aria-hidden="true">💌</span>`;
+document.querySelector("#welcome-title").innerHTML = `Dear ${escapeHtml(CONFIG.name)}... <span aria-hidden="true">💌</span>`;
 document.querySelector("#age-title").innerHTML = `Selamat datang di <span id="age-label">${CONFIG.age}</span>, ${escapeHtml(CONFIG.name)}! <span class="age-title-emoji" aria-hidden="true">🎉</span>`;
 senderName.textContent = CONFIG.sender;
 
@@ -179,6 +179,29 @@ async function typeLetter() {
       if (!reducedMotion.matches) {
         await wait(8);
       }
+    }
+
+    const highlightedPhrases = [
+      "Selamat ulang tahun",
+      "ngerayain kamu",
+      "baik banget",
+      "kuat",
+      "beruntung",
+      "sehat",
+      "makin bahagia",
+      "tercapai",
+      "26",
+      "random",
+      "makasih",
+      "penuh hal-hal baik",
+      "selalu dukung kamu"
+    ];
+
+    if (highlightedPhrases.some((phrase) => paragraphText.includes(phrase))) {
+      paragraph.innerHTML = highlightedPhrases.reduce(
+        (text, phrase) => text.replace(phrase, `<strong><em>${phrase}</em></strong>`),
+        paragraphText
+      );
     }
 
     cursor.remove();
