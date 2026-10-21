@@ -459,13 +459,19 @@ h1 {
 }
 
 .envelope {
+  display: block;
   position: relative;
   width: min(74vw, 270px);
   aspect-ratio: 1.55 / 1;
+  padding: 0;
+  border: 0;
   isolation: isolate;
   background: var(--cream);
+  color: inherit;
+  font: inherit;
   border-radius: 0.8rem;
   cursor: pointer;
+  text-align: initial;
   transform-style: preserve-3d;
   filter: drop-shadow(0 17px 12px rgba(117, 74, 105, 0.2));
   transition: transform 600ms var(--ease);

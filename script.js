@@ -296,7 +296,7 @@ function showWish(direction = "next") {
   wishIcon.textContent = icon;
   const progress = ((currentWish + 1) / CONFIG.wishes.length) * 100;
   wishesProgressBar.style.width = `${progress}%`;
-  wishesProgress.value = currentWish + 1;
+  wishesProgress.setAttribute("aria-valuenow", String(currentWish + 1));
   wishesProgressLabel.textContent = `${currentWish + 1} / ${CONFIG.wishes.length}`;
   previousWishButton.disabled = currentWish === 0;
   nextWishButton.innerHTML = currentWish === CONFIG.wishes.length - 1
@@ -432,12 +432,6 @@ function updateConfetti() {
 
 openButton.addEventListener("click", startExperience);
 envelope.addEventListener("click", startExperience);
-envelope.addEventListener("keydown", (event) => {
-  if (event.key === "Enter" || event.key === " ") {
-    event.preventDefault();
-    startExperience();
-  }
-});
 continueButton.addEventListener("click", continueToLetter);
 ageBackButton.addEventListener("click", returnToWelcome);
 backButton.addEventListener("click", () => {
