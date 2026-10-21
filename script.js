@@ -41,7 +41,7 @@ let particles = [];
 
 document.title = `Buat ${CONFIG.name}, dari ${CONFIG.sender} 💌`;
 document.querySelector("#welcome-title").innerHTML = `Hai ${escapeHtml(CONFIG.name)}... <span aria-hidden="true">💌</span>`;
-document.querySelector("#age-title").innerHTML = `Selamat datang di <span id="age-label">${CONFIG.age}</span>, ${escapeHtml(CONFIG.name)}! <span aria-hidden="true">🎉</span>`;
+document.querySelector("#age-title").innerHTML = `Selamat datang di <span id="age-label">${CONFIG.age}</span>, ${escapeHtml(CONFIG.name)}! <span class="age-title-emoji" aria-hidden="true">🎉</span>`;
 senderName.textContent = CONFIG.sender;
 
 function escapeHtml(value) {

@@ -335,7 +335,14 @@ button:disabled {
   margin-bottom: 0.45rem;
   font-family: "Caveat", "Segoe Print", cursive;
   font-size: clamp(2.2rem, 8vw, 4rem);
+  line-height: 1.18;
+}
+
+.age-title-emoji {
+  display: inline-block;
+  margin: 0.08em 0.14em 0.12em;
   line-height: 1;
+  vertical-align: middle;
 }
 
 .age-note {
