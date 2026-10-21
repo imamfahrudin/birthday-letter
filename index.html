@@ -90,11 +90,41 @@
             <p>With love,</p>
             <p class="signature"><span id="sender-name">Kevin</span> <span aria-hidden="true">💖</span></p>
           </div>
+          <button class="primary-button" id="wishes-button" type="button" hidden>
+            Buka 26 wishes <span aria-hidden="true">✨</span>
+          </button>
           <button class="secondary-button" id="back-button" type="button" hidden>
-            Balik ke awal <span aria-hidden="true">↩️</span>
+            Kembali <span aria-hidden="true">↩️</span>
           </button>
           <span class="letter-card__scroll-corner" aria-hidden="true"></span>
         </article>
+      </section>
+
+      <section class="screen screen--wishes" id="wishes-screen" aria-labelledby="wishes-title" aria-hidden="true">
+        <div class="screen-content wishes-content">
+          <p class="eyebrow">A little wish for every year</p>
+          <h2 id="wishes-title">26 wishes for you <span aria-hidden="true">✨</span></h2>
+          <p class="wishes-intro">Satu per satu, karena kamu pantas mendapatkan banyak hal baik.</p>
+
+          <article class="wish-card" id="wish-card" aria-live="polite">
+            <span class="wish-number" id="wish-number">01 / 26</span>
+            <div class="wish-icon" id="wish-icon" aria-hidden="true">🌷</div>
+            <p class="wish-text" id="wish-text">Semoga hari-harimu selalu punya alasan kecil untuk tersenyum.</p>
+          </article>
+
+          <div class="wishes-progress" aria-hidden="true"><span id="wishes-progress-bar"></span></div>
+          <div class="wish-navigation">
+            <button class="secondary-button wish-previous-button" id="previous-wish-button" type="button" disabled>
+              Sebelumnya
+            </button>
+            <button class="primary-button" id="next-wish-button" type="button">
+              Wish berikutnya
+            </button>
+          </div>
+          <button class="secondary-button wishes-back-button" id="wishes-back-button" type="button">
+            Balik ke surat <span aria-hidden="true">↩️</span>
+          </button>
+        </div>
       </section>
     </main>
 

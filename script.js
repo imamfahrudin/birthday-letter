@@ -19,6 +19,34 @@ const CONFIG = {
     "Pokoknya, makasih ya sudah jadi Rizka yang apa adanya.",
     "Semoga tahun ini jadi tahun yang hangat, seru, dan penuh hal-hal baik.",
     "Selamat ulang tahun! Aku selalu dukung kamu."
+  ],
+  wishes: [
+    ["Semoga hari-harimu selalu punya alasan kecil untuk tersenyum.", "🌷"],
+    ["Semoga kamu selalu sehat, kuat, dan punya waktu untuk beristirahat.", "🌿"],
+    ["Semoga semua usaha kamu pelan-pelan menemukan jalannya.", "🌟"],
+    ["Semoga kamu dikelilingi orang-orang yang tulus menyayangimu.", "💖"],
+    ["Semoga kamu selalu berani memilih hal yang membuatmu bahagia.", "🦋"],
+    ["Semoga rezeki dan kesempatan baik datang dari arah yang tidak disangka.", "🍀"],
+    ["Semoga kamu tidak terlalu keras pada diri sendiri.", "☁️"],
+    ["Semoga setiap lelahmu terbayar dengan sesuatu yang indah.", "🌈"],
+    ["Semoga kamu selalu punya tempat untuk pulang dan bercerita.", "🏡"],
+    ["Semoga mimpi-mimpi kecilmu tidak pernah terasa terlalu kecil.", "🌙"],
+    ["Semoga kamu semakin bangga dengan dirimu sendiri.", "👑"],
+    ["Semoga tahun ini membawa banyak kejutan yang menyenangkan.", "🎁"],
+    ["Semoga kamu menemukan lebih banyak hal yang membuatmu excited.", "✨"],
+    ["Semoga kamu selalu dimaafkan oleh dirimu sendiri.", "🤍"],
+    ["Semoga tawa kamu tetap jadi suara favorit banyak orang.", "😊"],
+    ["Semoga kamu punya keberanian untuk memulai lagi kapan pun perlu.", "🌱"],
+    ["Semoga hari-hari sulit terasa lebih ringan karena kamu tidak sendirian.", "🤝"],
+    ["Semoga kamu mendapat semua cinta yang kamu berikan kepada orang lain.", "💐"],
+    ["Semoga hal-hal sederhana selalu bisa membuatmu merasa cukup.", "🍰"],
+    ["Semoga kamu semakin dekat dengan versi dirimu yang kamu impikan.", "🪞"],
+    ["Semoga ada banyak cerita baru yang membuatmu tertawa.", "📖"],
+    ["Semoga kamu selalu punya alasan untuk percaya pada hari esok.", "🌤️"],
+    ["Semoga langkahmu ringan, bahkan ketika jalannya belum jelas.", "👣"],
+    ["Semoga kamu selalu tahu: kamu sangat berarti.", "💌"],
+    ["Semoga satu tahun ke depan terasa hangat dan penuh warna.", "🎨"],
+    ["Semoga kamu bahagia—bukan hanya hari ini, tapi setiap hari setelahnya.", "🎂"]
   ]
 };
 
@@ -26,12 +54,21 @@ const screens = {
   welcome: document.querySelector("#welcome-screen"),
   age: document.querySelector("#age-screen"),
   letter: document.querySelector("#letter-screen")
+  ,wishes: document.querySelector("#wishes-screen")
 };
 
 const openButton = document.querySelector("#open-button");
 const continueButton = document.querySelector("#continue-button");
 const ageBackButton = document.querySelector("#age-back-button");
 const backButton = document.querySelector("#back-button");
+const wishesButton = document.querySelector("#wishes-button");
+const wishesBackButton = document.querySelector("#wishes-back-button");
+const nextWishButton = document.querySelector("#next-wish-button");
+const previousWishButton = document.querySelector("#previous-wish-button");
+const wishNumber = document.querySelector("#wish-number");
+const wishText = document.querySelector("#wish-text");
+const wishIcon = document.querySelector("#wish-icon");
+const wishesProgressBar = document.querySelector("#wishes-progress-bar");
 const envelope = document.querySelector("#envelope");
 const ageNumber = document.querySelector("#age-number");
 const letterBody = document.querySelector("#letter-body");
@@ -46,6 +83,33 @@ let ageTimer = null;
 let typingRun = 0;
 let confettiFrame = null;
 let particles = [];
+let currentWish = 0;
+
+const wishHighlights = [
+  "tersenyum",
+  "sehat",
+  "beristirahat",
+  "usaha kamu",
+  "hal baik",
+  "tulus menyayangimu",
+  "bahagia",
+  "rezeki",
+  "kesempatan baik",
+  "tidak terlalu keras",
+  "lelahmu",
+  "tidak sendirian",
+  "bangga dengan dirimu sendiri",
+  "kejutan yang menyenangkan",
+  "memaafkan",
+  "tawa kamu",
+  "berani",
+  "cinta",
+  "merasa cukup",
+  "mimpi",
+  "percaya pada hari esok",
+  "sangat berarti",
+  "bahagia"
+];
 
 document.title = `Buat ${CONFIG.name}, dari ${CONFIG.sender} 💌`;
 document.querySelector("#welcome-title").innerHTML = `Dear ${escapeHtml(CONFIG.name)}... <span aria-hidden="true">💌</span>`;
@@ -214,6 +278,69 @@ async function typeLetter() {
   window.requestAnimationFrame(() => letterClosing.classList.add("is-visible"));
   backButton.hidden = false;
   backButton.disabled = false;
+  wishesButton.hidden = false;
+  wishesButton.disabled = false;
+}
+
+function showWish() {
+  const [text, icon] = CONFIG.wishes[currentWish];
+  wishNumber.textContent = `${String(currentWish + 1).padStart(2, "0")} / 26`;
+  wishText.innerHTML = formatWishText(text);
+  wishIcon.textContent = icon;
+  wishesProgressBar.style.width = `${((currentWish + 1) / CONFIG.wishes.length) * 100}%`;
+  previousWishButton.disabled = currentWish === 0;
+  nextWishButton.innerHTML = currentWish === CONFIG.wishes.length - 1
+    ? "Ulangi dari awal"
+    : "Wish berikutnya";
+}
+
+function formatWishText(text) {
+  return wishHighlights
+    .slice()
+    .sort((first, second) => second.length - first.length)
+    .reduce((formattedText, phrase) => {
+      const safePhrase = escapeHtml(phrase).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      return formattedText.replace(
+        new RegExp(safePhrase, "gi"),
+        (match) => `<strong><em>${match}</em></strong>`
+      );
+    }, escapeHtml(text));
+}
+
+function openWishes() {
+  if (wishesButton.disabled) return;
+  wishesButton.disabled = true;
+  currentWish = 0;
+  showWish();
+  showScreen("wishes");
+}
+
+function nextWish() {
+  currentWish = (currentWish + 1) % CONFIG.wishes.length;
+  showWish();
+  launchConfetti(currentWish === CONFIG.wishes.length - 1 ? 70 : 18);
+}
+
+function previousWish() {
+  if (currentWish === 0) return;
+  currentWish -= 1;
+  showWish();
+}
+
+function backToLetter() {
+  showScreen("letter");
+  wishesButton.disabled = false;
+}
+
+function returnToAge() {
+  typingRun += 1;
+  window.clearTimeout(ageTimer);
+  ageNumber.textContent = CONFIG.age;
+  ageNumber.classList.add("is-landed");
+  continueButton.hidden = false;
+  continueButton.disabled = false;
+  ageBackButton.hidden = false;
+  showScreen("age");
 }
 
 function wait(milliseconds) {
@@ -310,8 +437,13 @@ backButton.addEventListener("click", () => {
   backButton.disabled = true;
   letterClosing.hidden = true;
   letterClosing.classList.remove("is-visible");
-  returnToWelcome();
+  wishesButton.hidden = true;
+  returnToAge();
 });
+wishesButton.addEventListener("click", openWishes);
+nextWishButton.addEventListener("click", nextWish);
+previousWishButton.addEventListener("click", previousWish);
+wishesBackButton.addEventListener("click", backToLetter);
 
 window.addEventListener("resize", resizeCanvas);
 reducedMotion.addEventListener?.("change", resizeCanvas);
