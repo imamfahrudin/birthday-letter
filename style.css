@@ -362,8 +362,7 @@ button:disabled {
   text-align: left;
 }
 
-.letter-card::before,
-.letter-card::after {
+.letter-card::before {
   content: "";
   position: absolute;
   width: 70px;
@@ -373,7 +372,18 @@ button:disabled {
 }
 
 .letter-card::before { top: 1rem; left: 1rem; border-right: 0; border-bottom: 0; border-radius: 1rem 0 0; }
-.letter-card::after { right: 1rem; bottom: 1rem; border-top: 0; border-left: 0; border-radius: 0 0 1rem; }
+
+.letter-card__scroll-corner {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin: 1.5rem 0 0 auto;
+  border: 2px solid rgba(255, 107, 157, 0.2);
+  border-top: 0;
+  border-left: 0;
+  border-radius: 0 0 1rem;
+  pointer-events: none;
+}
 
 .letter-card__topline {
   margin-bottom: 1.1rem;
