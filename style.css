@@ -175,6 +175,11 @@ h1 {
   position: relative;
   width: min(74vw, 270px);
   aspect-ratio: 1.55 / 1;
+  isolation: isolate;
+  background: var(--cream);
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transform-style: preserve-3d;
   filter: drop-shadow(0 17px 12px rgba(117, 74, 105, 0.2));
   transition: transform 600ms var(--ease);
 }
@@ -195,7 +200,8 @@ h1 {
   inset: 7% 6%;
   z-index: 1;
   height: 78%;
-  background: var(--cream);
+  background-color: var(--cream);
+  opacity: 1;
 }
 
 .envelope__paper::after {

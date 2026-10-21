@@ -257,6 +257,13 @@ function updateConfetti() {
 }
 
 openButton.addEventListener("click", startExperience);
+envelope.addEventListener("click", startExperience);
+envelope.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    startExperience();
+  }
+});
 continueButton.addEventListener("click", continueToLetter);
 backButton.addEventListener("click", () => {
   if (backButton.disabled || activeScreen !== "letter") return;
