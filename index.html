@@ -107,12 +107,20 @@
           <p class="wishes-intro">Satu per satu, karena kamu pantas mendapatkan banyak hal baik.</p>
 
           <article class="wish-card" id="wish-card" aria-live="polite">
-            <span class="wish-number" id="wish-number">01 / 26</span>
+            <div class="wish-card__glow" aria-hidden="true"></div>
+            <div class="wish-card__meta">
+              <span class="wish-number" id="wish-number">01 / 26</span>
+              <span class="wish-label">for your next chapter</span>
+            </div>
             <div class="wish-icon" id="wish-icon" aria-hidden="true">🌷</div>
             <p class="wish-text" id="wish-text">Semoga hari-harimu selalu punya alasan kecil untuk tersenyum.</p>
           </article>
 
-          <div class="wishes-progress" aria-hidden="true"><span id="wishes-progress-bar"></span></div>
+          <div class="wishes-progress-row">
+            <span>26 wishes</span>
+            <div class="wishes-progress" role="progressbar" aria-label="Progress membaca wishes" aria-valuemin="1" aria-valuemax="26" aria-valuenow="1"><span id="wishes-progress-bar"></span></div>
+            <span id="wishes-progress-label">1 / 26</span>
+          </div>
           <div class="wish-navigation">
             <button class="secondary-button wish-previous-button" id="previous-wish-button" type="button" disabled>
               Sebelumnya

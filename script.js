@@ -69,6 +69,9 @@ const wishNumber = document.querySelector("#wish-number");
 const wishText = document.querySelector("#wish-text");
 const wishIcon = document.querySelector("#wish-icon");
 const wishesProgressBar = document.querySelector("#wishes-progress-bar");
+const wishCard = document.querySelector("#wish-card");
+const wishesProgress = document.querySelector(".wishes-progress");
+const wishesProgressLabel = document.querySelector("#wishes-progress-label");
 const envelope = document.querySelector("#envelope");
 const ageNumber = document.querySelector("#age-number");
 const letterBody = document.querySelector("#letter-body");
@@ -84,6 +87,7 @@ let typingRun = 0;
 let confettiFrame = null;
 let particles = [];
 let currentWish = 0;
+let wishSwipeStartX = null;
 
 const wishHighlights = [
   "tersenyum",
@@ -282,12 +286,18 @@ async function typeLetter() {
   wishesButton.disabled = false;
 }
 
-function showWish() {
+function showWish(direction = "next") {
   const [text, icon] = CONFIG.wishes[currentWish];
+  wishCard.classList.remove("is-entering-next", "is-entering-previous");
+  void wishCard.offsetWidth;
+  wishCard.classList.add(direction === "previous" ? "is-entering-previous" : "is-entering-next");
   wishNumber.textContent = `${String(currentWish + 1).padStart(2, "0")} / 26`;
   wishText.innerHTML = formatWishText(text);
   wishIcon.textContent = icon;
-  wishesProgressBar.style.width = `${((currentWish + 1) / CONFIG.wishes.length) * 100}%`;
+  const progress = ((currentWish + 1) / CONFIG.wishes.length) * 100;
+  wishesProgressBar.style.width = `${progress}%`;
+  wishesProgress.value = currentWish + 1;
+  wishesProgressLabel.textContent = `${currentWish + 1} / ${CONFIG.wishes.length}`;
   previousWishButton.disabled = currentWish === 0;
   nextWishButton.innerHTML = currentWish === CONFIG.wishes.length - 1
     ? "Ulangi dari awal"
@@ -317,14 +327,13 @@ function openWishes() {
 
 function nextWish() {
   currentWish = (currentWish + 1) % CONFIG.wishes.length;
-  showWish();
-  launchConfetti(currentWish === CONFIG.wishes.length - 1 ? 70 : 18);
+  showWish("next");
 }
 
 function previousWish() {
   if (currentWish === 0) return;
   currentWish -= 1;
-  showWish();
+  showWish("previous");
 }
 
 function backToLetter() {
@@ -444,6 +453,27 @@ wishesButton.addEventListener("click", openWishes);
 nextWishButton.addEventListener("click", nextWish);
 previousWishButton.addEventListener("click", previousWish);
 wishesBackButton.addEventListener("click", backToLetter);
+
+wishCard.addEventListener("pointerdown", (event) => {
+  if (event.pointerType === "mouse" && event.button !== 0) return;
+  wishSwipeStartX = event.clientX;
+  wishCard.setPointerCapture?.(event.pointerId);
+});
+
+wishCard.addEventListener("pointerup", (event) => {
+  if (wishSwipeStartX === null) return;
+
+  const distance = event.clientX - wishSwipeStartX;
+  wishSwipeStartX = null;
+
+  if (Math.abs(distance) < 55) return;
+  if (distance < 0) nextWish();
+  else previousWish();
+});
+
+wishCard.addEventListener("pointercancel", () => {
+  wishSwipeStartX = null;
+});
 
 window.addEventListener("resize", resizeCanvas);
 reducedMotion.addEventListener?.("change", resizeCanvas);
