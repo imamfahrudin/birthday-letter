@@ -431,7 +431,10 @@ button:disabled {
 
 .letter-paragraph {
   max-width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.7rem;
+  background: rgba(35, 24, 45, 0.06);
 }
 
 .typing-cursor {
