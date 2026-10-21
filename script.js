@@ -7,11 +7,11 @@ const CONFIG = {
   age: 26,
   sender: "Kevin",
   letter: [
-    "Selamat ulang tahun untuk salah satu orang paling luar biasa yang aku kenal. Hari ini adalah tentang merayakan dirimu: hatimu yang besar, semangatmu yang cerah, dan caramu membuat momen-momen sederhana terasa istimewa.",
-    "Semoga kamu tahu betapa berarti kebaikanmu bagi orang-orang di sekitarmu. Kamu memiliki kekuatan yang besar dengan hati yang begitu lembut, dan aku merasa beruntung bisa menyebutmu sebagai teman. Aku selalu tersenyum saat mengingat obrolan, tawa, dan momen-momen kecil yang telah kita lewati bersama.",
-    "Saat kamu memasuki usia baru ini, aku mendoakan kesehatan, kebahagiaan yang tulus, keberanian untuk mengejar impian, dan kesuksesan dalam semua hal yang sedang kamu perjuangkan. Semoga usia 26 memberimu semakin banyak alasan untuk tertawa, beristirahat, bertumbuh, dan bangga pada dirimu sendiri.",
-    "Dan ya, sekarang kamu resmi berusia 26 tahun—terdengar cukup dewasa, tetapi jangan khawatir: kamu tetap boleh bersikap konyol, makan kue ulang tahun untuk sarapan, dan berpura-pura sudah memahami semuanya.",
-    "Terima kasih sudah menjadi dirimu apa adanya. Semoga tahun ini terasa sehangat, seindah, dan seberkesan yang layak kamu dapatkan. Selamat ulang tahun, Rizka. Aku akan selalu mendukungmu."
+    "Selamat ulang tahun ya, Rizka! Hari ini waktunya ngerayain kamu—dengan semua kebaikan, energi cerah, dan kelucuanmu yang bikin hari-hari biasa jadi lebih seru.",
+    "Serius deh, kamu itu baik banget. Kamu juga kuat, walaupun kadang mungkin nggak merasa begitu. Aku beruntung bisa jadi temanmu, dan sampai sekarang masih suka senyum kalau ingat obrolan, tawa, dan momen-momen kecil yang pernah kita lewatin bareng.",
+    "Di umur yang baru ini, semoga kamu selalu sehat, makin bahagia, dan semua hal yang lagi kamu usahakan pelan-pelan bisa tercapai. Semoga 26 membawa banyak cerita seru, rezeki, kesempatan baru, dan alasan buat bangga sama diri sendiri.",
+    "Oh iya, sekarang kamu resmi 26 tahun. Kedengarannya dewasa banget, ya? Tapi santai aja—kamu masih boleh tetap random, makan kue ulang tahun buat sarapan, dan pura-pura tahu harus ngapain dalam hidup.",
+    "Pokoknya, makasih ya sudah jadi Rizka yang apa adanya. Semoga tahun ini jadi tahun yang hangat, seru, dan penuh hal-hal baik. Selamat ulang tahun! Aku selalu dukung kamu."
   ]
 };
 
@@ -38,9 +38,9 @@ let typingRun = 0;
 let confettiFrame = null;
 let particles = [];
 
-document.title = `Untuk ${CONFIG.name}, dengan kasih 💌`;
+document.title = `Buat ${CONFIG.name}, dari ${CONFIG.sender} 💌`;
 document.querySelector("#welcome-title").innerHTML = `Hai ${escapeHtml(CONFIG.name)}... <span aria-hidden="true">💌</span>`;
-document.querySelector("#age-title").innerHTML = `Selamat datang di usia <span id="age-label">${CONFIG.age}</span>, ${escapeHtml(CONFIG.name)}! <span aria-hidden="true">🎉</span>`;
+document.querySelector("#age-title").innerHTML = `Selamat datang di <span id="age-label">${CONFIG.age}</span>, ${escapeHtml(CONFIG.name)}! <span aria-hidden="true">🎉</span>`;
 senderName.textContent = CONFIG.sender;
 
 function escapeHtml(value) {
