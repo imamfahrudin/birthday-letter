@@ -7,11 +7,18 @@ const CONFIG = {
   age: 26,
   sender: "Kevin",
   letter: [
-    "Selamat ulang tahun ya, Rizka! Hari ini waktunya ngerayain kamu—dengan semua kebaikan, energi cerah, dan kelucuanmu yang bikin hari-hari biasa jadi lebih seru.",
-    "Serius deh, kamu itu baik banget. Kamu juga kuat, walaupun kadang mungkin nggak merasa begitu. Aku beruntung bisa jadi pacarmu, dan sampai sekarang masih suka senyum kalau ingat obrolan, tawa, dan momen-momen kecil yang pernah kita lewatin bareng.",
-    "Di umur yang baru ini, semoga kamu selalu sehat, makin bahagia, dan semua hal yang lagi kamu usahakan pelan-pelan bisa tercapai. Semoga 26 membawa banyak cerita seru, rezeki, kesempatan baru, dan alasan buat bangga sama diri sendiri.",
-    "Oh iya, sekarang kamu resmi 26 tahun. Kedengarannya dewasa banget, ya? Tapi santai aja—kamu masih boleh tetap random, rebahan seharian, dan pura-pura tahu harus ngapain dalam hidup.",
-    "Pokoknya, makasih ya sudah jadi Rizka yang apa adanya. Semoga tahun ini jadi tahun yang hangat, seru, dan penuh hal-hal baik. Selamat ulang tahun! Aku selalu dukung kamu."
+    "Selamat ulang tahun ya, Rizka!",
+    "Hari ini waktunya ngerayain kamu—dengan semua kebaikan, energi cerah, dan kelucuanmu yang bikin hari-hari biasa jadi lebih seru.",
+    "Serius deh, kamu itu baik banget. Kamu juga kuat, walaupun kadang mungkin nggak merasa begitu.",
+    "Aku beruntung bisa jadi pacarmu, dan sampai sekarang masih suka senyum kalau ingat obrolan, tawa, dan momen-momen kecil yang pernah kita lewatin bareng.",
+    "Di umur yang baru ini, semoga kamu selalu sehat dan makin bahagia.",
+    "Semoga semua hal yang lagi kamu usahakan pelan-pelan bisa tercapai.",
+    "Semoga 26 membawa banyak cerita seru, rezeki, kesempatan baru, dan alasan buat bangga sama diri sendiri.",
+    "Oh iya, sekarang kamu resmi 26 tahun. Kedengarannya dewasa banget, ya?",
+    "Tapi santai aja—kamu masih boleh tetap random, rebahan seharian, dan pura-pura tahu harus ngapain dalam hidup.",
+    "Pokoknya, makasih ya sudah jadi Rizka yang apa adanya.",
+    "Semoga tahun ini jadi tahun yang hangat, seru, dan penuh hal-hal baik.",
+    "Selamat ulang tahun! Aku selalu dukung kamu."
   ]
 };
 
@@ -155,12 +162,12 @@ async function typeLetter() {
       if (currentRun !== typingRun) return;
       textNode.nodeValue += character;
       if (!reducedMotion.matches) {
-        await wait(18);
+        await wait(8);
       }
     }
 
     cursor.remove();
-    if (!reducedMotion.matches) await wait(220);
+    if (!reducedMotion.matches) await wait(100);
   }
 
   if (currentRun !== typingRun) return;
