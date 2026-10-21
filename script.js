@@ -30,6 +30,7 @@ const screens = {
 
 const openButton = document.querySelector("#open-button");
 const continueButton = document.querySelector("#continue-button");
+const ageBackButton = document.querySelector("#age-back-button");
 const backButton = document.querySelector("#back-button");
 const envelope = document.querySelector("#envelope");
 const ageNumber = document.querySelector("#age-number");
@@ -127,6 +128,7 @@ function finishAgeReveal() {
   ageTimer = window.setTimeout(() => {
     continueButton.hidden = false;
     continueButton.disabled = false;
+    ageBackButton.hidden = false;
   }, reducedMotion.matches ? 0 : 700);
 }
 
@@ -136,6 +138,19 @@ function continueToLetter() {
   continueButton.disabled = true;
   showScreen("letter");
   typeLetter();
+}
+
+function returnToWelcome() {
+  typingRun += 1;
+  window.clearTimeout(ageTimer);
+  envelope.classList.remove("is-opening");
+  ageNumber.textContent = "1";
+  ageNumber.classList.remove("is-landed");
+  continueButton.hidden = true;
+  continueButton.disabled = true;
+  ageBackButton.hidden = true;
+  openButton.disabled = false;
+  showScreen("welcome");
 }
 
 async function typeLetter() {
@@ -265,21 +280,14 @@ envelope.addEventListener("keydown", (event) => {
   }
 });
 continueButton.addEventListener("click", continueToLetter);
+ageBackButton.addEventListener("click", returnToWelcome);
 backButton.addEventListener("click", () => {
   if (backButton.disabled || activeScreen !== "letter") return;
-
-  typingRun += 1;
   backButton.hidden = true;
   backButton.disabled = true;
   letterClosing.hidden = true;
   letterClosing.classList.remove("is-visible");
-  envelope.classList.remove("is-opening");
-  ageNumber.textContent = "1";
-  ageNumber.classList.remove("is-landed");
-  continueButton.hidden = true;
-  continueButton.disabled = true;
-  openButton.disabled = false;
-  showScreen("welcome");
+  returnToWelcome();
 });
 
 window.addEventListener("resize", resizeCanvas);
