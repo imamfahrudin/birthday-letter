@@ -8,9 +8,9 @@ const CONFIG = {
   sender: "Kevin",
   letter: [
     "Selamat ulang tahun ya, Rizka! Hari ini waktunya ngerayain kamu—dengan semua kebaikan, energi cerah, dan kelucuanmu yang bikin hari-hari biasa jadi lebih seru.",
-    "Serius deh, kamu itu baik banget. Kamu juga kuat, walaupun kadang mungkin nggak merasa begitu. Aku beruntung bisa jadi temanmu, dan sampai sekarang masih suka senyum kalau ingat obrolan, tawa, dan momen-momen kecil yang pernah kita lewatin bareng.",
+    "Serius deh, kamu itu baik banget. Kamu juga kuat, walaupun kadang mungkin nggak merasa begitu. Aku beruntung bisa jadi pacarmu, dan sampai sekarang masih suka senyum kalau ingat obrolan, tawa, dan momen-momen kecil yang pernah kita lewatin bareng.",
     "Di umur yang baru ini, semoga kamu selalu sehat, makin bahagia, dan semua hal yang lagi kamu usahakan pelan-pelan bisa tercapai. Semoga 26 membawa banyak cerita seru, rezeki, kesempatan baru, dan alasan buat bangga sama diri sendiri.",
-    "Oh iya, sekarang kamu resmi 26 tahun. Kedengarannya dewasa banget, ya? Tapi santai aja—kamu masih boleh tetap random, makan kue ulang tahun buat sarapan, dan pura-pura tahu harus ngapain dalam hidup.",
+    "Oh iya, sekarang kamu resmi 26 tahun. Kedengarannya dewasa banget, ya? Tapi santai aja—kamu masih boleh tetap random, rebahan seharian, dan pura-pura tahu harus ngapain dalam hidup.",
     "Pokoknya, makasih ya sudah jadi Rizka yang apa adanya. Semoga tahun ini jadi tahun yang hangat, seru, dan penuh hal-hal baik. Selamat ulang tahun! Aku selalu dukung kamu."
   ]
 };
@@ -22,6 +22,7 @@ const screens = {
 };
 
 const openButton = document.querySelector("#open-button");
+const continueButton = document.querySelector("#continue-button");
 const backButton = document.querySelector("#back-button");
 const envelope = document.querySelector("#envelope");
 const ageNumber = document.querySelector("#age-number");
@@ -73,6 +74,8 @@ function startExperience() {
   if (openButton.disabled || activeScreen !== "welcome") return;
 
   openButton.disabled = true;
+  continueButton.hidden = true;
+  continueButton.disabled = true;
   envelope.classList.add("is-opening");
 
   window.setTimeout(() => {
@@ -115,9 +118,17 @@ function runCountdown() {
 
 function finishAgeReveal() {
   ageTimer = window.setTimeout(() => {
-    showScreen("letter");
-    typeLetter();
-  }, reducedMotion.matches ? 250 : 2000);
+    continueButton.hidden = false;
+    continueButton.disabled = false;
+  }, reducedMotion.matches ? 0 : 700);
+}
+
+function continueToLetter() {
+  if (continueButton.disabled || continueButton.hidden || activeScreen !== "age") return;
+
+  continueButton.disabled = true;
+  showScreen("letter");
+  typeLetter();
 }
 
 async function typeLetter() {
@@ -239,6 +250,7 @@ function updateConfetti() {
 }
 
 openButton.addEventListener("click", startExperience);
+continueButton.addEventListener("click", continueToLetter);
 backButton.addEventListener("click", () => {
   if (backButton.disabled || activeScreen !== "letter") return;
 
@@ -250,6 +262,8 @@ backButton.addEventListener("click", () => {
   envelope.classList.remove("is-opening");
   ageNumber.textContent = "1";
   ageNumber.classList.remove("is-landed");
+  continueButton.hidden = true;
+  continueButton.disabled = true;
   openButton.disabled = false;
   showScreen("welcome");
 });

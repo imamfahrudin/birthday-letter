@@ -343,6 +343,10 @@ button:disabled {
   color: var(--muted-text);
 }
 
+.age-continue-button {
+  margin-top: 1rem;
+}
+
 .letter-card {
   position: relative;
   width: min(100%, 680px);
