@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#ffd6e0" />
+    <meta
+      name="description"
+      content="A little birthday letter for Rizka from Kevin."
+    />
+    <title>For Rizka, with love 💌</title>
+
+    <!-- Optional web fonts. The CSS has a friendly system-font fallback. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <main class="site-shell">
+      <section class="screen screen--welcome is-active" id="welcome-screen" aria-labelledby="welcome-title">
+        <div class="ambient-decor" aria-hidden="true">
+          <span class="decor decor--balloon decor--one">🎈</span>
+          <span class="decor decor--sparkle decor--two">✨</span>
+          <span class="decor decor--heart decor--three">💖</span>
+          <span class="decor decor--cake decor--four">🎂</span>
+          <span class="decor decor--sparkle decor--five">✦</span>
+        </div>
+
+        <div class="screen-content welcome-content">
+          <p class="eyebrow">A little something for you</p>
+          <h1 id="welcome-title">Hey Rizka... <span aria-hidden="true">💌</span></h1>
+          <p class="screen-subtitle">Someone left something special for you.</p>
+
+          <div class="envelope-wrap">
+            <div class="envelope" id="envelope" aria-hidden="true">
+              <div class="envelope__paper"></div>
+              <div class="envelope__flap"></div>
+              <div class="envelope__front"></div>
+              <span class="envelope__seal">♥</span>
+            </div>
+            <!-- TODO: add photo here if you want a small keepsake beside the envelope. -->
+          </div>
+
+          <button class="primary-button" id="open-button" type="button">
+            Tap to open <span aria-hidden="true">💌</span>
+          </button>
+        </div>
+      </section>
+
+      <section class="screen screen--age" id="age-screen" aria-labelledby="age-title" aria-hidden="true">
+        <div class="screen-content age-content">
+          <p class="eyebrow">A new chapter begins</p>
+          <div class="age-number" id="age-number" aria-live="polite">1</div>
+          <h2 id="age-title">Welcome to <span id="age-label">26</span>, Rizka! <span aria-hidden="true">🎉</span></h2>
+          <p class="age-note">Twenty-six looks wonderful on you.</p>
+        </div>
+      </section>
+
+      <section class="screen screen--letter" id="letter-screen" aria-labelledby="letter-title" aria-hidden="true">
+        <div class="letter-backdrop" aria-hidden="true">
+          <span class="backdrop-heart backdrop-heart--one">♡</span>
+          <span class="backdrop-heart backdrop-heart--two">✦</span>
+          <span class="backdrop-heart backdrop-heart--three">♡</span>
+        </div>
+
+        <article class="letter-card">
+          <div class="letter-card__topline"><span>✦</span> A birthday note <span>✦</span></div>
+          <h2 id="letter-title">Dear Rizka,</h2>
+          <div class="letter-body" id="letter-body" aria-live="polite"></div>
+          <div class="letter-closing" id="letter-closing" hidden>
+            <p>With love,</p>
+            <p class="signature"><span id="sender-name">Kevin</span> <span aria-hidden="true">💖</span></p>
+          </div>
+          <button class="secondary-button" id="replay-button" type="button" hidden>
+            Read again <span aria-hidden="true">🔁</span>
+          </button>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
